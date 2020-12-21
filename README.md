@@ -2,6 +2,10 @@
 
 ASSUMPTION: Once a deck is added to a shoe, it cannot be removed. Once cards are added to the shoe there is not way to separate out the decks without sorting out the whole shoe. My understanding of what a shoe is in poker is from this video https://www.youtube.com/watch?v=-P_8VwVXwVk. So we only shuffle the cards in the shoe as a whole and not individual decks.
 
+Tools Used:
+STS4 4.9.0
+Postman 7.36.1
+
 **NOTE: Have not been able to get to the following because of lack of time.**
  1. Synchronisation/Thread safety verification and issues
  2. JUNIT tests
