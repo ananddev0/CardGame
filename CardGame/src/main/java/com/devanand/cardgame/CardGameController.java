@@ -45,4 +45,9 @@ public class CardGameController {
 			(games.getGame(id)).addPlayer(player);
 		}
 	}
+	
+	@DeleteMapping("games/{game-id}/players/{player-id}")
+	public void deletePlayer(@PathVariable("game-id") String gameId, @PathVariable("player-id") String playerId) {
+		games.getGame(gameId).deletePlayer(playerId);
+	}
 }

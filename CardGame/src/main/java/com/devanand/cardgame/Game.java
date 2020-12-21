@@ -37,6 +37,10 @@ public class Game {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public void deletePlayer(String id) {
+		players.remove(id);
+	}
 
 	public void shuffle() {
 		//TODO Shuffle
