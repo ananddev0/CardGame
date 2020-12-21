@@ -3,6 +3,7 @@ package com.devanand.cardgame;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Game {
 	
@@ -43,7 +44,21 @@ public class Game {
 	}
 
 	public void shuffle() {
-		//TODO Shuffle
+		for (int i = 0; i < shoe.size()/2; i++) {
+			if (shoe.size()>0) {
+				int index1 = ThreadLocalRandom.current().nextInt(0, shoe.size());
+				int index2 = ThreadLocalRandom.current().nextInt(0, shoe.size());
+				swapCards (index1, index2);
+			}
+		}
 	}
 	
+	private void swapCards (int index1, int index2) {
+		Card card1 = shoe.get(index1);
+		Card card2 = shoe.get(index2);
+		
+		Card temp = card1;
+		shoe.set(index1, card2);
+		shoe.set(index2, temp);
+	}
 }
