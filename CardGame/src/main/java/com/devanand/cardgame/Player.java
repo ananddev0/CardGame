@@ -1,9 +1,13 @@
 package com.devanand.cardgame;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 	
 	private String id = null;
 	private String name = null;
+	private List<Card> cards = new ArrayList<Card>();
 	
 	public Player (String id, String name) {
 		this.id = id;
@@ -30,6 +34,12 @@ public class Player {
 		this.id = id;
 	}
 	
+	public void addCards(List<Card> cards) {
+		this.cards.addAll(cards);
+	}
 	
+	public List<Card> getCards() {
+		return this.cards;
+	}
 
 }

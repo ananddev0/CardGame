@@ -51,7 +51,7 @@ public class CardGameController {
 	}
 	
 	@PostMapping("games/{game-id}/players")
-	public void addPlayers(@PathVariable("game-id") String id, @RequestBody List<Player> players) {
+	public List<Player> addPlayers(@PathVariable("game-id") String id, @RequestBody List<Player> players) {
 		if (games.getGame(id) == null) 
 			throw new GameNotFoundException(id); 
 		
@@ -61,6 +61,8 @@ public class CardGameController {
 			}
 			(games.getGame(id)).addPlayer(player);
 		}
+		
+		return new ArrayList<Player>(games.getGame(id).getPlayers().values());
 	}
 	
 	@DeleteMapping("games/{game-id}/players/{player-id}")
@@ -125,4 +127,33 @@ public class CardGameController {
 			}
 		}
 	}	
+	
+	@PutMapping ("games/{game-id}/players/{player-id}/deal/{number-of-cards-per-hand}")
+	public void dealCards(@PathVariable("game-id") String gameId, 
+			@PathVariable("player-id") String playerId,
+			@PathVariable("number-of-cards-per-hand") int numOfCards) {
+		
+			if (games.getGame(gameId) == null) 
+				throw new GameNotFoundException(gameId);
+			if (games.getGame(gameId).getPlayer(playerId) == null) 
+				throw new PlayerNotFoundException(playerId);
+		
+			List<Card> shoe = games.getGame(gameId).getShoe();
+			List<Card> hand = null;
+			if (shoe.size()> numOfCards)
+				hand = shoe.subList(0, numOfCards);
+			else
+				hand = shoe;
+			
+			if (hand.size()> 0) {
+				games.getGame(gameId).getPlayer(playerId).addCards(new ArrayList<Card>(hand));	
+				games.getGame(gameId).getShoe().removeAll(hand);
+			}
+	}
+	
+	@GetMapping("games/{game-id}/players/{player-id}/cards")
+	public List<Card> getPlayerCards(@PathVariable("game-id") String gameId, 
+			@PathVariable("player-id") String playerId) {
+		return games.getGame(gameId).getPlayer(playerId).getCards();
+	}
 }

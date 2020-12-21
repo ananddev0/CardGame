@@ -27,6 +27,10 @@ public class Game {
 		players.put(player.getId(), player);
 	}
 	
+	public Player getPlayer(String id) {
+		return players.get(id);
+	}
+	
 	public List<Card> getShoe() {
 		return shoe;
 	}
