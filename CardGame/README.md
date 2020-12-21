@@ -8,7 +8,7 @@ ASSUMPTION: Once a deck is added to a shoe, it cannot be removed. Once cards are
  3. More testing
 
 ## API
-For Details of usage look at the **CardGame/CardGame/CardGame.Postman_collection.json**
+For Details of usage import **CardGame/CardGame/CardGame.Postman_collection.json** into postman.
 
 ### POST {{url}}/games
 Creates a new game and returns a game identifier
