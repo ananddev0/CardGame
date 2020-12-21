@@ -28,5 +28,8 @@ public class Games {
 	public void deleteGame(String id) {
 		gameMap.remove(id);
 	}
-
+	
+	public Game getGame(String id) {
+		return gameMap.get(id);
+	}
 }

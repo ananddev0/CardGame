@@ -26,6 +26,18 @@ public class Game {
 		players.put(player.getId(), player);
 	}
 	
+	public List<Card> getShoe() {
+		return shoe;
+	}
+
+	public HashMap<String, Player> getPlayers() {
+		return players;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public void shuffle() {
 		//TODO Shuffle
 	}
