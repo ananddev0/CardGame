@@ -1,11 +1,10 @@
 package com.devanand.cardgame;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -117,9 +116,7 @@ public class CardGameController {
 
 	private void countBySuit(List<Card> shoe, LinkedHashMap<String, Integer> result) {
 		
-		
-		for (Card c: shoe) {
-			
+		for (Card c: shoe) {		
 			if (result.get(c.getSuit().toString())==null) {
 				result.put(c.getSuit().toString(), 1);
 			} else {
@@ -140,20 +137,43 @@ public class CardGameController {
 		
 			List<Card> shoe = games.getGame(gameId).getShoe();
 			List<Card> hand = null;
-			if (shoe.size()> numOfCards)
+			int numCardsToRemove = 0;
+			if (shoe.size()> numOfCards) {
 				hand = shoe.subList(0, numOfCards);
-			else
+				numCardsToRemove = numOfCards;
+			} else {
 				hand = shoe;
-			
-			if (hand.size()> 0) {
-				games.getGame(gameId).getPlayer(playerId).addCards(new ArrayList<Card>(hand));	
-				games.getGame(gameId).getShoe().removeAll(hand);
+				numCardsToRemove = shoe.size();
 			}
+			
+			games.getGame(gameId).getPlayer(playerId).addCards(new ArrayList<Card>(hand));
+			
+			for (int i=0; i < numCardsToRemove; i++) {
+				games.getGame(gameId).getShoe().remove(i);
+			}	
+			
 	}
 	
 	@GetMapping("games/{game-id}/players/{player-id}/cards")
 	public List<Card> getPlayerCards(@PathVariable("game-id") String gameId, 
 			@PathVariable("player-id") String playerId) {
+		if (games.getGame(gameId) == null) 
+			throw new GameNotFoundException(gameId);
+		if (games.getGame(gameId).getPlayer(playerId) == null) 
+			throw new PlayerNotFoundException(playerId);
 		return games.getGame(gameId).getPlayer(playerId).getCards();
+	}
+	
+	@GetMapping("games/{game-id}/players")
+	public List<String> getPlayers(@PathVariable("game-id") String gameId) {
+		if (games.getGame(gameId) == null) 
+			throw new GameNotFoundException(gameId);
+
+		List <Player> players = new ArrayList<Player>(games.getGame(gameId).getPlayers().values());
+		Collections.sort(players, new SortByFaceValueComparator());
+		
+		
+		
+		return players.stream().map(x -> x.toString()).collect(Collectors.toList());
 	}
 }

@@ -41,5 +41,13 @@ public class Player {
 	public List<Card> getCards() {
 		return this.cards;
 	}
+	
+	public int getFaceCardValue() {
+		return cards.stream().mapToInt(x -> x.getFace().ordinal()+1).sum();
+	}
+	
+	public String toString() {
+		return this.id + ", " + this.name + ", " + getFaceCardValue();
+	}
 
 }
