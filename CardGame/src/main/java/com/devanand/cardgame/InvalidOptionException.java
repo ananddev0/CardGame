@@ -3,11 +3,10 @@ package com.devanand.cardgame;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
-public class GameNotFoundException extends RuntimeException {
+public class InvalidOptionException extends RuntimeException {
 
-	public GameNotFoundException(String id) {
+	public InvalidOptionException (String option) {
 		throw new ResponseStatusException(
-		           HttpStatus.NOT_FOUND, "Game with id " + id + "not found");
+		           HttpStatus.BAD_REQUEST, "This option is invalid: " + option);
 	}
-
 }

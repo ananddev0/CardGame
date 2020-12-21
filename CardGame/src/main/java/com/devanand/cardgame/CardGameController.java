@@ -1,9 +1,13 @@
 package com.devanand.cardgame;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class CardGameController {
@@ -75,4 +78,51 @@ public class CardGameController {
 		
 		games.getGame(id).shuffle();
 	}
+	
+	@GetMapping("games/{game-id}/decks/count/{groupby}")
+	public LinkedHashMap<String, Integer> getUndealtCardsInShoe(@PathVariable("game-id") String id, @PathVariable("groupby") String groupBy) {
+		if (games.getGame(id) == null) 
+			throw new GameNotFoundException(id);
+		
+		List<Card> shoe = games.getGame(id).getShoe();
+		LinkedHashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
+		switch(groupBy) {
+		case "suits":
+			countBySuit(shoe, result);
+			break;
+		case "cards":
+			countByCards(shoe, result);
+			break;
+			default: throw new InvalidOptionException(groupBy);
+		}
+		return result;
+	}
+
+	private void countByCards(List<Card> shoe, LinkedHashMap<String, Integer> result) {
+		List<Card> copyOfShoe = new ArrayList<Card>(shoe);
+		Collections.sort(copyOfShoe, new SortBySuitAscFaceDesc());
+		
+		for (Card c: copyOfShoe) {
+			
+			if (result.get(c.toString())==null) {
+				result.put(c.toString(), 1);
+			} else {
+				result.put(c.toString(), result.get(c.toString())+1);
+			}
+		
+		}
+	}
+
+	private void countBySuit(List<Card> shoe, LinkedHashMap<String, Integer> result) {
+		
+		
+		for (Card c: shoe) {
+			
+			if (result.get(c.getSuit().toString())==null) {
+				result.put(c.getSuit().toString(), 1);
+			} else {
+				result.put(c.getSuit().toString(), result.get(c.getSuit().toString())+1);
+			}
+		}
+	}	
 }
