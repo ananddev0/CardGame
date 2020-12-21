@@ -27,7 +27,7 @@ public class Game {
 	}
 	
 	public void shuffle() {
-		
+		//TODO Shuffle
 	}
 	
 }
