@@ -36,6 +36,11 @@ public class CardGameController {
 		games.deleteGame(id);	
 	}
 	
+	@PostMapping("games/{game-id}/decks")
+	public void addGameDeck (@PathVariable("game-id") String id) {
+		games.getGame(id).addDeck(Card.getDeck());
+	}
+	
 	@PostMapping("games/{game-id}/players")
 	public void addPlayers(@PathVariable("game-id") String id, @RequestBody List<Player> players) {
 		for (Player player: players) {
