@@ -1,0 +1,743 @@
+{
+	"info": {
+		"_postman_id": "cdcc86c4-db39-43ca-b272-73fe39f20436",
+		"name": "CardGame",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response includes results\", function () {\r",
+							"    pm.expect(pm.response.json()).to.include.keys(\"id\");\r",
+							"});\r",
+							"\r",
+							"let gameid = pm.response.json().id;\r",
+							"pm.environment.set('gameid', gameid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Games",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add players to game without identifiers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"let playerid = pm.response.json()[0].id;\r",
+							"pm.environment.set('playerid', playerid);\r",
+							"\r",
+							"let playerid1 = pm.response.json()[1].id;\r",
+							"pm.environment.set('playerid1', playerid1);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"name\": \"Dev\"\r\n    },\r\n    {\r\n        \"name\": \"Ira\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add players to game with identifiers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": \"ABCDEF\",\r\n        \"name\": \"Kavita\"\r\n    },\r\n    {\r\n        \"id\": \"GHIJKLM\",\r\n        \"name\": \"Anand\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a deck to a shoe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add a deck to a shoe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Games",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shuffle a Gamedeck AKA shoe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks/shuffle",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks",
+						"shuffle"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Games",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deal 2 cards to first player",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid}}/deal/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid}}",
+						"deal",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deal 2 cards to second player",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid1}}/deal/2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid1}}",
+						"deal",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of first player's cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid}}/cards",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid}}",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of second player's cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid1}}/cards",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid1}}",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List players with values",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid1}}/cards",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid1}}",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "View Games",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Count undealt cards in shoe by suit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks/count/suits",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks",
+						"count",
+						"suits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Count undealt cards in shoe by cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks/count/cards",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks",
+						"count",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove first player",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove second player",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/players/{{playerid1}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"players",
+						"{{playerid1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Count undealt cards in shoe by cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks/count/cards",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks",
+						"count",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Count undealt cards in shoe by suit",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}/decks/count/suits",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}",
+						"decks",
+						"count",
+						"suits"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Game",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/games/{{gameid}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"games",
+						"{{gameid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
