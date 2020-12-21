@@ -20,7 +20,7 @@ Deletes the game with the provided game identifier.
 Adds a new deck to the game deck AKA Shoe
 
 ### POST {{url}}/games/{{gameid}}/players
-Adds a new player to the game with the provided game identifier and returns a player identifier
+Adds new players to the game with the provided game identifier. See POSTMAN import for example.
 
 ### DELETE {{url}}/games/{{gameid}}/players/{{playerid}}
 Deletes a player with the player identifier from the game with the game identifier
