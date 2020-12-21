@@ -10,6 +10,7 @@ Postman 7.36.1
  1. Synchronisation/Thread safety verification and issues
  2. JUNIT tests
  3. More testing
+ 4. Logging
 
 ## API
 For Detailed examples on usage import **CardGame/CardGame/CardGame.Postman_collection.json** into postman.
