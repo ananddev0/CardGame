@@ -17,12 +17,16 @@ public class Games {
 		return games;
 	}
 	
-	public static void addGame(Game game) {
+	public void addGame(Game game) {
 		gameMap.put(game.getId(), game);
 	}
 	
-	public static List<Game> getGames() {
+	public List<Game> getGames() {
 		return new ArrayList<Game>(gameMap.values());
+	}
+	
+	public void deleteGame(String id) {
+		gameMap.remove(id);
 	}
 
 }
