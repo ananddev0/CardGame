@@ -13,7 +13,7 @@ Postman 7.36.1
  4. Logging
 
 ## API
-For Detailed examples on usage import **CardGame/CardGame/CardGame.Postman_collection.json** into postman.
+For Detailed examples on usage import [**CardGame/CardGame/CardGame.Postman_collection.json**](CardGame/CardGame.postman_collection.json) into postman.
 
 ### POST {{url}}/games
 Creates a new game and returns a game identifier
