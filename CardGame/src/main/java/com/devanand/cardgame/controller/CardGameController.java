@@ -38,7 +38,7 @@ public class CardGameController {
 	}
 	
 	@PostMapping("games")
-	public Game createGame() {
+	public synchronized Game createGame() {
 		
 		String random = RandomStringUtils.randomAlphanumeric(8);
 		Game game = new Game(random);
@@ -48,12 +48,12 @@ public class CardGameController {
 	}
 	
 	@DeleteMapping("games/{game-id}")
-	public void deleteGame(@PathVariable("game-id") String id) {
+	public synchronized void deleteGame(@PathVariable("game-id") String id) {
 		games.deleteGame(id);	
 	}
 	
 	@PostMapping("games/{game-id}/decks")
-	public void addGameDeck (@PathVariable("game-id") String id) {
+	public synchronized void addGameDeck (@PathVariable("game-id") String id) {
 		if (games.getGame(id) == null) 
 			throw new GameNotFoundException(id);
 		
@@ -61,7 +61,7 @@ public class CardGameController {
 	}
 	
 	@PostMapping("games/{game-id}/players")
-	public List<Player> addPlayers(@PathVariable("game-id") String id, @RequestBody List<Player> players) {
+	public synchronized List<Player> addPlayers(@PathVariable("game-id") String id, @RequestBody List<Player> players) {
 		if (games.getGame(id) == null) 
 			throw new GameNotFoundException(id); 
 		
@@ -76,7 +76,7 @@ public class CardGameController {
 	}
 	
 	@DeleteMapping("games/{game-id}/players/{player-id}")
-	public void deletePlayer(@PathVariable("game-id") String gameId, @PathVariable("player-id") String playerId) {
+	public synchronized void deletePlayer(@PathVariable("game-id") String gameId, @PathVariable("player-id") String playerId) {
 		if (games.getGame(gameId) == null) 
 			throw new GameNotFoundException(gameId);
 		//move the cards of the user back to the shoe
@@ -87,7 +87,7 @@ public class CardGameController {
 	}
 	
 	@PutMapping("games/{game-id}/decks/shuffle")
-	public void shuffleGameDecks (@PathVariable("game-id") String id) {
+	public synchronized void shuffleGameDecks (@PathVariable("game-id") String id) {
 		if (games.getGame(id) == null) 
 			throw new GameNotFoundException(id);
 		
@@ -140,7 +140,7 @@ public class CardGameController {
 	}	
 	
 	@PutMapping ("games/{game-id}/players/{player-id}/deal/{number-of-cards-per-hand}")
-	public void dealCards(@PathVariable("game-id") String gameId, 
+	public synchronized void dealCards(@PathVariable("game-id") String gameId, 
 			@PathVariable("player-id") String playerId,
 			@PathVariable("number-of-cards-per-hand") int numOfCards) {
 
