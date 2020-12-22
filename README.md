@@ -4,7 +4,8 @@ ASSUMPTION: Once a deck is added to a shoe, it cannot be removed. Once cards are
 
 Tools Used:
 STS4 4.9.0
-Postman 7.36.1 (Don't forget to import [**CardGame/CardGame/CardGame.Postman_collection.json**](CardGame/CardGame.postman_collection.json) )
+Postman 7.36.1 
+(Don't forget to import [**CardGame/CardGame/CardGame.Postman_collection.json**](CardGame/CardGame.postman_collection.json))
 
 **NOTE: MISSING Have not been able to get to the following because of lack of time.**
  1. Synchronisation/Thread safety verification and issues
