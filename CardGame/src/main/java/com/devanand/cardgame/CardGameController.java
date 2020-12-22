@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.devanand.cardgame.exception.GameNotFoundException;
+import com.devanand.cardgame.exception.InvalidOptionException;
+import com.devanand.cardgame.exception.PlayerNotFoundException;
+
 @RestController
 public class CardGameController {
 	Games games = Games.getInstance();

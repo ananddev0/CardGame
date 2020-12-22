@@ -1,4 +1,4 @@
-package com.devanand.cardgame;
+package com.devanand.cardgame.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
