@@ -226,6 +226,20 @@
 		},
 		{
 			"name": "View Games",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -461,16 +475,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/games/{{gameid}}/players/{{playerid1}}/cards",
+					"raw": "{{url}}/games/{{gameid}}/players",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"games",
 						"{{gameid}}",
-						"players",
-						"{{playerid1}}",
-						"cards"
+						"players"
 					]
 				}
 			},
@@ -649,7 +661,9 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							"\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -683,6 +697,14 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"All card counts by suit are 26\", () => {\r",
+							"  const responseJson = pm.response.json();\r",
+							"  pm.expect(responseJson.HEARTS).to.eql(26);\r",
+							"  pm.expect(responseJson.DIAMONDS).to.eql(26);\r",
+							"  pm.expect(responseJson.SPADES).to.eql(26);\r",
+							"  pm.expect(responseJson.CLUBS).to.eql(26);\r",
 							"});"
 						],
 						"type": "text/javascript"
