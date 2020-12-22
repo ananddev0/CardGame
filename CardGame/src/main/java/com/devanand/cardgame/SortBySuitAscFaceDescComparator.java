@@ -2,7 +2,7 @@ package com.devanand.cardgame;
 
 import java.util.*;
 
-public class SortBySuitAscFaceDesc implements Comparator<Card> {
+public class SortBySuitAscFaceDescComparator implements Comparator<Card> {
 
 	@Override
 	public int compare(Card o1, Card o2) {

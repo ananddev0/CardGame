@@ -105,7 +105,7 @@ public class CardGameController {
 
 	private void countByCards(List<Card> shoe, LinkedHashMap<String, Integer> result) {
 		List<Card> copyOfShoe = new ArrayList<Card>(shoe);
-		Collections.sort(copyOfShoe, new SortBySuitAscFaceDesc());
+		Collections.sort(copyOfShoe, new SortBySuitAscFaceDescComparator());
 		
 		for (Card c: copyOfShoe) {
 			
