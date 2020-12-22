@@ -55,11 +55,10 @@ public class Game {
 			if (shoe.size()>0) {
 				int index1 = ThreadLocalRandom.current().nextInt(0, shoeForShuffle.size());
 				int index2 = ThreadLocalRandom.current().nextInt(0, shoeForShuffle.size());
-				swapCards (shoeForShuffle, index1, index2);
-				shoe = new ArrayDeque<Card>(shoeForShuffle);
-				
+				swapCards (shoeForShuffle, index1, index2);	
 			}
 		}
+		shoe = new ArrayDeque<Card>(shoeForShuffle);
 	}
 	
 	private void swapCards (List<Card> forShuffle, int index1, int index2) {
