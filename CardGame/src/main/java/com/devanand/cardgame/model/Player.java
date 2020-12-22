@@ -1,4 +1,4 @@
-package com.devanand.cardgame;
+package com.devanand.cardgame.model;
 
 import java.util.ArrayList;
 import java.util.List;

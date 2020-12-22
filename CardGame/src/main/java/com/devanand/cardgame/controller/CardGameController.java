@@ -1,4 +1,4 @@
-package com.devanand.cardgame;
+package com.devanand.cardgame.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devanand.cardgame.exception.GameNotFoundException;
 import com.devanand.cardgame.exception.InvalidOptionException;
 import com.devanand.cardgame.exception.PlayerNotFoundException;
+import com.devanand.cardgame.model.Card;
+import com.devanand.cardgame.model.Game;
+import com.devanand.cardgame.model.Games;
+import com.devanand.cardgame.model.Player;
+import com.devanand.cardgame.model.SortByFaceValueComparator;
+import com.devanand.cardgame.model.SortBySuitAscFaceDescComparator;
 
 @RestController
 public class CardGameController {
