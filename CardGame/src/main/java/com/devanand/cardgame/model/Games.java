@@ -1,13 +1,13 @@
 package com.devanand.cardgame.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 public class Games {
 	
 	private static final Games games = new Games();
-	private static final HashMap<String, Game> gameMap = new HashMap<String, Game> ();
+	private static final Hashtable<String, Game> gameMap = new Hashtable<String, Game> ();
 	
 	private Games() {
 		

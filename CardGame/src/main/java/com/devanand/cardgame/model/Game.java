@@ -3,7 +3,7 @@ package com.devanand.cardgame.model;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -11,7 +11,7 @@ public class Game {
 	
 	String id = null;
 	Deque<Card> shoe = new ArrayDeque<>();
-	HashMap<String, Player> players = new HashMap<String, Player>();
+	Hashtable<String, Player> players = new Hashtable<String, Player>();
 	
 	public Game(String id) {
 		this.id = id;
@@ -37,7 +37,7 @@ public class Game {
 		return shoe;
 	}
 
-	public HashMap<String, Player> getPlayers() {
+	public Hashtable<String, Player> getPlayers() {
 		return players;
 	}
 
