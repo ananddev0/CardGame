@@ -79,7 +79,10 @@ public class CardGameController {
 	public void deletePlayer(@PathVariable("game-id") String gameId, @PathVariable("player-id") String playerId) {
 		if (games.getGame(gameId) == null) 
 			throw new GameNotFoundException(gameId);
-		
+		//move the cards of the user back to the shoe
+		for (Card c: games.getGame(gameId).getPlayer(playerId).getCards()) {
+			games.getGame(gameId).getShoe().push(c);
+		}
 		games.getGame(gameId).deletePlayer(playerId);
 	}
 	
