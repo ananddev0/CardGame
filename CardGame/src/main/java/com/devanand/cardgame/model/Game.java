@@ -1,6 +1,8 @@
 package com.devanand.cardgame.model;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -8,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Game {
 	
 	String id = null;
-	List<Card> shoe = new ArrayList<>();
+	Deque<Card> shoe = new ArrayDeque<>();
 	HashMap<String, Player> players = new HashMap<String, Player>();
 	
 	public Game(String id) {
@@ -31,7 +33,7 @@ public class Game {
 		return players.get(id);
 	}
 	
-	public List<Card> getShoe() {
+	public Deque<Card> getShoe() {
 		return shoe;
 	}
 
@@ -48,21 +50,24 @@ public class Game {
 	}
 
 	public void shuffle() {
-		for (int i = 0; i < shoe.size()/2; i++) {
+		List<Card> shoeForShuffle = new ArrayList<Card>(shoe);
+		for (int i = 0; i < shoeForShuffle.size()/2; i++) {
 			if (shoe.size()>0) {
-				int index1 = ThreadLocalRandom.current().nextInt(0, shoe.size());
-				int index2 = ThreadLocalRandom.current().nextInt(0, shoe.size());
-				swapCards (index1, index2);
+				int index1 = ThreadLocalRandom.current().nextInt(0, shoeForShuffle.size());
+				int index2 = ThreadLocalRandom.current().nextInt(0, shoeForShuffle.size());
+				swapCards (shoeForShuffle, index1, index2);
+				shoe = new ArrayDeque<Card>(shoeForShuffle);
+				
 			}
 		}
 	}
 	
-	private void swapCards (int index1, int index2) {
-		Card card1 = shoe.get(index1);
-		Card card2 = shoe.get(index2);
+	private void swapCards (List<Card> forShuffle, int index1, int index2) {
+		Card card1 = forShuffle.get(index1);
+		Card card2 = forShuffle.get(index2);
 		
 		Card temp = card1;
-		shoe.set(index1, card2);
-		shoe.set(index2, temp);
+		forShuffle.set(index1, card2);
+		forShuffle.set(index2, temp);
 	}
 }

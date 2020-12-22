@@ -2,6 +2,7 @@ package com.devanand.cardgame.controller;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Deque;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -95,7 +96,7 @@ public class CardGameController {
 		if (games.getGame(id) == null) 
 			throw new GameNotFoundException(id);
 		
-		List<Card> shoe = games.getGame(id).getShoe();
+		Deque<Card> shoe = games.getGame(id).getShoe();
 		LinkedHashMap<String, Integer> result = new LinkedHashMap<String, Integer>();
 		switch(groupBy) {
 		case "suits":
@@ -109,7 +110,7 @@ public class CardGameController {
 		return result;
 	}
 
-	private void countByCards(List<Card> shoe, LinkedHashMap<String, Integer> result) {
+	private void countByCards(Deque<Card> shoe, LinkedHashMap<String, Integer> result) {
 		List<Card> copyOfShoe = new ArrayList<Card>(shoe);
 		Collections.sort(copyOfShoe, new SortBySuitAscFaceDescComparator());
 		
@@ -124,7 +125,7 @@ public class CardGameController {
 		}
 	}
 
-	private void countBySuit(List<Card> shoe, LinkedHashMap<String, Integer> result) {
+	private void countBySuit(Deque<Card> shoe, LinkedHashMap<String, Integer> result) {
 		
 		for (Card c: shoe) {		
 			if (result.get(c.getSuit().toString())==null) {
@@ -139,29 +140,19 @@ public class CardGameController {
 	public void dealCards(@PathVariable("game-id") String gameId, 
 			@PathVariable("player-id") String playerId,
 			@PathVariable("number-of-cards-per-hand") int numOfCards) {
-		
-			if (games.getGame(gameId) == null) 
-				throw new GameNotFoundException(gameId);
-			if (games.getGame(gameId).getPlayer(playerId) == null) 
-				throw new PlayerNotFoundException(playerId);
-		
-			List<Card> shoe = games.getGame(gameId).getShoe();
-			List<Card> hand = null;
-			int numCardsToRemove = 0;
-			if (shoe.size()> numOfCards) {
-				hand = shoe.subList(0, numOfCards);
-				numCardsToRemove = numOfCards;
-			} else {
-				hand = shoe;
-				numCardsToRemove = shoe.size();
-			}
-			
-			games.getGame(gameId).getPlayer(playerId).addCards(new ArrayList<Card>(hand));
-			
-			for (int i=0; i < numCardsToRemove; i++) {
-				games.getGame(gameId).getShoe().remove(i);
-			}	
-			
+
+		if (games.getGame(gameId) == null) 
+			throw new GameNotFoundException(gameId);
+		if (games.getGame(gameId).getPlayer(playerId) == null) 
+			throw new PlayerNotFoundException(playerId);
+
+		Deque<Card> shoe = games.getGame(gameId).getShoe();
+
+		int cardsToDeal = numOfCards < shoe.size()? numOfCards: shoe.size();
+
+		while(cardsToDeal-- > 0) {
+			games.getGame(gameId).getPlayer(playerId).addCard(shoe.pop());
+		}
 	}
 	
 	@GetMapping("games/{game-id}/players/{player-id}/cards")

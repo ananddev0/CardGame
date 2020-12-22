@@ -50,4 +50,9 @@ public class Player {
 		return this.id + ", " + this.name + ", " + getFaceCardValue();
 	}
 
+	public void addCard(Card card) {
+		cards.add(card);
+		
+	}
+
 }
